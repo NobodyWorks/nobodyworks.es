@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="79.881 -75.900 77.300 77.300" width="96" height="96" role="img" aria-label="NobodyWorks">
+  <title>NobodyWorks</title>
+  <style>
+    /* Colour: override --nw-switch when the file is inlined; the literal is the fallback
+       for &lt;img&gt; use, where custom properties do not cascade in from the host page. */
+    .stroke {
+      fill: none;
+      stroke: var(--nw-switch, #4D8DFF);
+      stroke-width: 14.306;
+      stroke-linecap: round;
+    }
+
+    /* 159.87 is the measured length of the major arc, not an estimate. A shorter dash
+       leaves the tail inside the gap and the ring never closes. */
+    .arc {
+      stroke-dasharray: 159.87;
+      animation: sweep 1500ms cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+
+    .bar {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: beat 1500ms cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+
+    @keyframes sweep {
+      0%        { stroke-dashoffset: 159.87; }
+      55%, 100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes beat {
+      0%, 40%   { transform: scaleY(0); }
+      70%, 100% { transform: scaleY(1); }
+    }
+
+    /* Someone who asked their system for less motion gets the symbol, lit and still. */
+    @media (prefers-reduced-motion: reduce) {
+      .arc, .bar { animation: none; }
+      .arc { stroke-dashoffset: 0; }
+      .bar { transform: none; }
+    }
+  </style>
+  <path class="stroke arc" d="M 136.414 -63.178 A 31.497 31.497 0 1 1 100.648 -63.178"/>
+  <path class="stroke bar" d="M 118.531 -68.747 L 118.531 -35.36"/>
+</svg>
