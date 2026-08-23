@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mensaje recibido — NobodyWorks</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/brand/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1524">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<style>
+  :root {
+    --ink: #0B1524;
+    --blue-light: #4D8DFF;
+    --on-dark: #C7D3E3;
+    --on-dark-firm: #EAF1FA;
+    --muted: #8496AC;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 40px 24px;
+    background: var(--ink);
+    color: var(--on-dark);
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .panel { width: min(100%, 480px); text-align: center; }
+
+  img { width: min(300px, 74%); height: auto; display: block; margin: 0 auto 34px; }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(26px, 5vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    text-wrap: balance;
+    color: var(--on-dark-firm);
+  }
+
+  p { margin: 16px 0 0; }
+  .small { font-size: 15px; color: var(--muted); }
+
+  a { color: var(--blue-light); text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; border-radius: 2px; }
+
+  .home { display: inline-block; margin-top: 32px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <main class="panel">
+    <img src="/brand/nobodyworks-logo-dark.svg" alt="NobodyWorks" width="300" height="47">
+    <h1>Mensaje recibido.</h1>
+    <p>Te respondo yo, normalmente en menos de veinticuatro horas laborables.</p>
+    <p class="small">
+      Si es urgente o prefieres el correo de siempre:
+      <a href="mailto:hola@nobodyworks.es">hola@nobodyworks.es</a>
+    </p>
+    <a class="home" href="/">Volver al inicio</a>
+  </main>
+</body>
+</html>

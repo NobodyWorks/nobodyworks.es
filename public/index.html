@@ -1,16 +1,665 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NobodyWorks</title>
-<link rel="icon" href="/brand/favicon-32.png">
+<title>NobodyWorks — Software a medida e integraciones de IA</title>
+<meta name="description" content="Estudio independiente de desarrollo. Proyectos completos, integraciones de IA y software a medida, con una sola persona al otro lado.">
+<link rel="canonical" href="https://nobodyworks.es/">
+<link rel="icon" href="/brand/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1524">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nobodyworks.es/">
+<meta property="og:title" content="NobodyWorks — Software a medida e integraciones de IA">
+<meta property="og:description" content="Proyectos completos con una sola persona al otro lado. Sin capas de gestión, sin cadenas de correos para cambiar un texto.">
+<meta property="og:image" content="https://nobodyworks.es/brand/nobodyworks-firma-logo-placa-400.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+
+<script>document.documentElement.classList.add('js');</script>
+
 <style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0B1524;
-font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#C7D3E3}
-.b{text-align:center;padding:24px}
-img{width:min(360px,72vw);height:auto;display:block;margin:0 auto 22px}
-p{font-size:14px;line-height:1.6;color:#6B7F9B;margin:0}
-a{color:#4D8DFF;text-decoration:none}
-</style></head><body><div class="b">
-<img src="/brand/nobodyworks-logo-dark.svg" alt="NobodyWorks">
-<p>Desarrollo web, integraciones de IA y software a medida.<br>
-<a href="mailto:hola@nobodyworks.es">hola@nobodyworks.es</a></p>
-</div></body></html>
+  :root {
+    --ink:        #0B1524;
+    --ink-soft:   #16233A;
+    --blue:       #1B6BFF;
+    --blue-light: #4D8DFF;
+    --grey:       #5B6675;
+    --surface:    #F5F7FA;
+    --border:     #E5EAF0;
+    --white:      #FFFFFF;
+
+    --on-dark:      #C7D3E3;
+    --on-dark-firm: #EAF1FA;
+
+    --font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --measure: 62ch;
+    --gutter: clamp(20px, 5vw, 40px);
+    --section: clamp(64px, 9vw, 112px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+
+  a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+  .shell { width: min(100% - var(--gutter) * 2, 1080px); margin-inline: auto; }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--white);
+    color: var(--ink);
+    padding: 12px 18px;
+    z-index: 10;
+    border-radius: 0 0 6px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ============ hero: the one dark surface in the whole page ============ */
+
+  .hero {
+    background: var(--ink);
+    color: var(--on-dark);
+    padding-block: clamp(72px, 13vw, 132px);
+  }
+
+  .hero-mark { width: min(430px, 82%); margin-bottom: clamp(36px, 6vw, 56px); }
+  .hero-mark svg { width: 100%; height: auto; display: block; }
+
+  .hero h1 {
+    font-size: clamp(30px, 5.2vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    max-width: 17ch;
+    color: var(--on-dark-firm);
+  }
+
+  .hero-sub {
+    margin-top: 22px;
+    max-width: 52ch;
+    font-size: clamp(17px, 2vw, 19px);
+    color: var(--on-dark);
+  }
+
+  .hero-actions {
+    margin-top: 38px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 24px;
+  }
+
+  .cta {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 7px;
+    transition: background-color 0.15s ease;
+  }
+  .cta:hover { background: #1257DB; }
+
+  .hero-alt { font-size: 15px; color: #8496AC; }
+  .hero-alt a { color: var(--blue-light); }
+
+  /* ============ light sections ============ */
+
+  .band { padding-block: var(--section); }
+  .band-tint { background: var(--surface); border-block: 1px solid var(--border); }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: clamp(25px, 3.6vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    max-width: 20ch;
+  }
+
+  .band > .shell > p { max-width: var(--measure); }
+  .lead { margin-top: 20px; font-size: 18px; }
+  .band p + p { margin-top: 16px; }
+
+  /* method: a real sequence, so it is numbered */
+
+  .steps {
+    margin-top: 44px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    counter-reset: step;
+  }
+
+  .step { counter-increment: step; }
+
+  .step h3 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .step h3::before {
+    content: counter(step, decimal-leading-zero);
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 10px;
+  }
+
+  .step p { color: var(--grey); font-size: 16px; }
+
+  /* services: not a sequence, so no numbers */
+
+  .services {
+    margin-top: 44px;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .service {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 24px;
+  }
+
+  .band-tint .service { background: var(--white); }
+
+  .service h3 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .service p { color: var(--grey); font-size: 15.5px; }
+
+  .service-note {
+    margin-top: 22px;
+    font-size: 15px;
+    color: var(--grey);
+    max-width: var(--measure);
+  }
+
+  /* accessibility: the one block that talks about the visitor, not about me */
+
+  .rule {
+    margin-top: 34px;
+    border-left: 3px solid var(--blue);
+    padding: 4px 0 4px 22px;
+    max-width: var(--measure);
+  }
+
+  .rule .date {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rule p { margin-top: 8px; }
+
+  .who { display: grid; gap: 34px; grid-template-columns: minmax(0, 1fr); }
+
+  @media (min-width: 760px) {
+    .who { grid-template-columns: 150px minmax(0, 1fr); align-items: start; gap: 40px; }
+  }
+
+  .who img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  /* ============ contact ============ */
+
+  .contact { background: var(--ink); color: var(--on-dark); padding-block: var(--section); }
+  .contact h2 { color: var(--on-dark-firm); }
+  .contact .eyebrow { color: #8496AC; }
+  .contact > .shell > p { max-width: var(--measure); }
+
+  .contact-grid { margin-top: 40px; display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr); }
+
+  @media (min-width: 860px) {
+    .contact-grid { grid-template-columns: minmax(0, 1fr) 260px; gap: 56px; }
+  }
+
+  form { display: flex; flex-direction: column; gap: 20px; }
+
+  .field { display: flex; flex-direction: column; gap: 7px; }
+
+  label { font-size: 15px; font-weight: 600; color: var(--on-dark-firm); }
+
+  .optional { font-weight: 400; color: #8496AC; }
+
+  input, textarea {
+    font: inherit;
+    font-size: 16px;
+    color: var(--on-dark-firm);
+    background: var(--ink-soft);
+    border: 1px solid #263553;
+    border-radius: 7px;
+    padding: 12px 14px;
+    width: 100%;
+  }
+
+  input::placeholder, textarea::placeholder { color: #63748F; }
+  input:hover, textarea:hover { border-color: #35496F; }
+  textarea { min-height: 130px; resize: vertical; }
+
+  form button {
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--blue);
+    border: 0;
+    border-radius: 7px;
+    padding: 14px 26px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.15s ease;
+  }
+  form button:hover { background: #1257DB; }
+
+  .form-note { font-size: 14px; color: #8496AC; max-width: 52ch; }
+
+  .honey { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .aside h3 { font-size: 16px; font-weight: 700; color: var(--on-dark-firm); margin-bottom: 8px; }
+  .aside p { font-size: 15px; color: #8496AC; }
+  .aside a { color: var(--blue-light); }
+  .aside .block + .block { margin-top: 26px; }
+
+  .alert {
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1px solid transparent;
+  }
+  .alert-bad { background: #2A1520; border-color: #6B2740; color: #FFC7D4; }
+
+  /* ============ footer ============ */
+
+  footer {
+    background: var(--ink);
+    color: #63748F;
+    font-size: 14px;
+    padding-block: 32px;
+    border-top: 1px solid #1B2942;
+  }
+
+  .footer-row { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  footer a { color: #8496AC; }
+
+  /* ============ the entry sequence ============ */
+  /* Each glyph is its own path in the wordmark, wrapped in a <g> so it can be
+     transformed: a CSS transform on the path itself would replace the presentation
+     transform that positions the glyph and the wordmark would collapse.
+     --arc-len and --d are written by the inline script from real measurements. */
+
+  .sw-arc, .sw-bar { transform-box: fill-box; }
+
+  .js .hero-mark .sw-arc {
+    stroke-dasharray: var(--arc-len, 200);
+    stroke-dashoffset: var(--arc-len, 200);
+    animation: draw 620ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+
+  .js .hero-mark .sw-bar {
+    transform-origin: 50% 100%;
+    transform: scaleY(0);
+    animation: rise 300ms cubic-bezier(0.34, 1.3, 0.64, 1) 430ms forwards;
+  }
+
+  .js .hero-mark .ltr {
+    opacity: 0;
+    animation: letter 380ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 430ms) forwards;
+  }
+
+  @keyframes draw   { to { stroke-dashoffset: 0; } }
+  @keyframes rise   { to { transform: scaleY(1); } }
+  @keyframes letter {
+    from { opacity: 0; transform: translate(0, 7px); }
+    to   { opacity: 1; transform: translate(0, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js .hero-mark .sw-arc { animation: none; stroke-dashoffset: 0; }
+    .js .hero-mark .sw-bar { animation: none; transform: none; }
+    .js .hero-mark .ltr    { animation: none; opacity: 1; }
+  }
+</style>
+</head>
+
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="hero">
+  <div class="shell">
+    <div class="hero-mark"><svg role="img" aria-label="NobodyWorks" xmlns="http://www.w3.org/2000/svg" width="746.46" height="117.90" viewBox="0 0 746.46 117.90"><g transform="translate(10.00,85.90)"><g class="ltr"><path d="M71.5 0V745H178.25L587.5 193L532.75 181.75V745H669V0H561.5L157.5 556L207.75 567.25V0Z" transform="translate(0.000,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<path class="sw-arc" d="M 136.414 -63.178 A 31.497 31.497 0 1 1 100.648 -63.178" fill="none" stroke="#4D8DFF" stroke-width="14.306" stroke-linecap="round"/>
+<path class="sw-bar" d="M 118.531 -68.747 L 118.531 -35.360" fill="none" stroke="#4D8DFF" stroke-width="14.306" stroke-linecap="round"/>
+<g class="ltr"><path d="M357.75 -12Q298.5 -12 249.0 11.25Q199.5 34.5 170.75 79L184.25 105V0H60.5V757H191.75V435.5L171.5 463.25Q199.75 506.75 248.0 531.125Q296.25 555.5 358.5 555.5Q436 555.5 498.125 517.875Q560.25 480.25 596.625 416.125Q633 352 633 271.75Q633 192.5 597.0 127.875Q561 63.25 498.875 25.625Q436.75 -12 357.75 -12ZM343.25 108Q388.25 108 422.875 129.0Q457.5 150 477.125 187.125Q496.75 224.25 496.75 271.75Q496.75 319.5 477.125 356.125Q457.5 392.75 422.875 414.125Q388.25 435.5 343.25 435.5Q299.75 435.5 265.25 414.5Q230.75 393.5 211.25 356.375Q191.75 319.25 191.75 271.75Q191.75 224.25 211.25 187.125Q230.75 150 265.25 129.0Q299.75 108 343.25 108Z" transform="translate(160.959,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M326.5 -12Q246.75 -12 181.375 24.875Q116 61.75 77.25 126.0Q38.5 190.25 38.5 272Q38.5 354.25 77.125 418.0Q115.75 481.75 181.0 518.625Q246.25 555.5 326.5 555.5Q406.75 555.5 471.625 518.75Q536.5 482 575.0 418.25Q613.5 354.5 613.5 272Q613.5 190 574.625 125.75Q535.75 61.5 470.875 24.75Q406 -12 326.5 -12ZM326.5 108Q370.75 108 404.5 129.0Q438.25 150 457.75 187.25Q477.25 224.5 477.25 272Q477.25 319.5 457.75 356.125Q438.25 392.75 404.5 414.125Q370.75 435.5 326.5 435.5Q282.25 435.5 248.125 414.125Q214 392.75 194.375 356.125Q174.75 319.5 174.75 272Q174.75 224.5 194.375 187.25Q214 150 248.125 129.0Q282.25 108 326.5 108Z" transform="translate(227.359,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M313.75 -12Q235 -12 172.75 25.625Q110.5 63.25 74.5 127.875Q38.5 192.5 38.5 271.75Q38.5 352 74.875 416.125Q111.25 480.25 173.375 517.875Q235.5 555.5 313 555.5Q375.25 555.5 423.625 531.125Q472 506.75 500 463.25L479.75 435.5V757H611V0H487.25V105L500.75 79Q472.75 34.5 422.875 11.25Q373 -12 313.75 -12ZM328.25 108Q372.5 108 406.625 129.0Q440.75 150 460.25 187.125Q479.75 224.25 479.75 271.75Q479.75 319.25 460.25 356.375Q440.75 393.5 406.625 414.5Q372.5 435.5 328.25 435.5Q284.25 435.5 249.125 414.125Q214 392.75 194.375 356.125Q174.75 319.5 174.75 271.75Q174.75 224.25 194.375 187.125Q214 150 249.0 129.0Q284 108 328.25 108Z" transform="translate(291.759,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M127 -220Q105 -220 84.0 -216.375Q63 -212.75 46.25 -204.5V-94.75Q59.25 -98 77.375 -100.875Q95.5 -103.75 111.5 -103.75Q156.75 -103.75 177.5 -83.25Q198.25 -62.75 213.5 -28.75L249.75 55L247.75 -55.25L11 543.5H152L317.75 101.5H267.5L433 543.5H574.5L337.75 -55.25Q317.25 -107 287.125 -144.25Q257 -181.5 217.375 -200.75Q177.75 -220 127 -220Z" transform="translate(358.159,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M210.75 0 11 745H157.25L313.75 110.25H275.75L439.5 745H580.75L744.25 110.25H706L862.75 745H1009L809.25 0H653L488.25 617.5H531.75L367 0Z" transform="translate(415.959,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M326.5 -12Q246.75 -12 181.375 24.875Q116 61.75 77.25 126.0Q38.5 190.25 38.5 272Q38.5 354.25 77.125 418.0Q115.75 481.75 181.0 518.625Q246.25 555.5 326.5 555.5Q406.75 555.5 471.625 518.75Q536.5 482 575.0 418.25Q613.5 354.5 613.5 272Q613.5 190 574.625 125.75Q535.75 61.5 470.875 24.75Q406 -12 326.5 -12ZM326.5 108Q370.75 108 404.5 129.0Q438.25 150 457.75 187.25Q477.25 224.5 477.25 272Q477.25 319.5 457.75 356.125Q438.25 392.75 404.5 414.125Q370.75 435.5 326.5 435.5Q282.25 435.5 248.125 414.125Q214 392.75 194.375 356.125Q174.75 319.5 174.75 272Q174.75 224.5 194.375 187.25Q214 150 248.125 129.0Q282.25 108 326.5 108Z" transform="translate(517.159,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M60.5 0V543.5H184.25V423.25L174.25 440.75Q192.5 502 233.25 525.875Q274 549.75 330.5 549.75H363V433.5H316Q260.25 433.5 226.0 399.375Q191.75 365.25 191.75 303V0Z" transform="translate(581.559,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M60.5 0V757H191.75V260.75L141.75 275.5L397.75 543.5H560.75L359.75 324.75L564.75 0H414.75L237.25 282L314.5 297.5L151 121.5L191.75 202.25V0Z" transform="translate(618.159,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g>
+<g class="ltr"><path d="M267.5 -12Q180.75 -12 116.375 29.625Q52 71.25 27.5 142L125.75 188.5Q147.25 143.25 184.625 117.25Q222 91.25 267.5 91.25Q303.5 91.25 324.5 106.875Q345.5 122.5 345.5 149.25Q345.5 165.25 337.0 175.75Q328.5 186.25 314.25 193.75Q300 201.25 282.5 206L193.5 231Q124.75 250.5 89.5 291.875Q54.25 333.25 54.25 389.25Q54.25 439.25 79.75 476.5Q105.25 513.75 150.75 534.625Q196.25 555.5 254.5 555.5Q331.5 555.5 390.75 518.5Q450 481.5 474.5 414.75L375.25 368.25Q361.25 405 328.25 426.75Q295.25 448.5 253.75 448.5Q220.75 448.5 201.625 433.75Q182.5 419 182.5 394.5Q182.5 379.5 190.5 368.75Q198.5 358 213.25 350.75Q228 343.5 246.5 338L334 312Q401.25 292.25 437.375 251.875Q473.5 211.5 473.5 153.75Q473.5 104.5 447.5 67.25Q421.5 30 375.5 9.0Q329.5 -12 267.5 -12Z" transform="translate(675.059,0.000) scale(0.100000,-0.100000)" fill="#FFFFFF"/></g></g></svg></div>
+    <h1>Software a medida e integraciones de IA, de principio a fin.</h1>
+    <p class="hero-sub">
+      Proyectos completos con una sola persona al otro lado. Sin capas de gestión,
+      sin cadenas de correos para cambiar un texto.
+    </p>
+    <div class="hero-actions">
+      <a class="cta" href="#contacto">Cuéntame tu proyecto</a>
+      <span class="hero-alt">o escribe directamente a <a href="mailto:hola@nobodyworks.es">hola@nobodyworks.es</a></span>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="band">
+    <div class="shell">
+      <p class="eyebrow">Cómo trabajo</p>
+      <h2>Primero el problema. Después, y solo después, el código.</h2>
+      <p class="lead">
+        Empiezo entendiendo el problema antes de proponer una solución. A veces la respuesta
+        correcta es construir menos de lo que se pedía, y decirlo a tiempo sale mucho más
+        barato que descubrirlo a mitad del desarrollo.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Entender</h3>
+          <p>
+            Antes de presupuestar nada, hablamos de qué tiene que resolver el proyecto y para
+            quién. Si lo que hace falta es más pequeño de lo que pensabas, lo sabrás aquí.
+          </p>
+        </div>
+        <div class="step">
+          <h3>Decidir</h3>
+          <p>
+            Alcance cerrado por escrito: qué entra, qué no entra y por qué. Las decisiones
+            técnicas quedan explicadas en un idioma que no exige ser programador.
+          </p>
+        </div>
+        <div class="step">
+          <h3>Construir</h3>
+          <p>
+            Entregas que puedes ver funcionando, no informes de progreso. Hablas siempre con
+            quien está escribiendo el código, porque somos la misma persona.
+          </p>
+        </div>
+        <div class="step">
+          <h3>Entregar</h3>
+          <p>
+            El proyecto se queda contigo: código, accesos y documentación. Sin dependencias
+            inventadas para asegurarme una cuota mensual.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-tint">
+    <div class="shell">
+      <p class="eyebrow">Qué hago</p>
+      <h2>Proyectos enteros, no piezas sueltas.</h2>
+
+      <div class="services">
+        <div class="service">
+          <h3>Software a medida</h3>
+          <p>
+            Herramientas internas, paneles y automatizaciones para procesos que hoy se
+            sostienen con hojas de cálculo y buena memoria.
+          </p>
+        </div>
+        <div class="service">
+          <h3>Integraciones de IA</h3>
+          <p>
+            Modelos de lenguaje conectados a tus datos y a tu producto, con criterio sobre
+            dónde aportan de verdad y dónde solo encarecen el mantenimiento.
+          </p>
+        </div>
+        <div class="service">
+          <h3>Desarrollo web completo</h3>
+          <p>
+            De la primera conversación al dominio funcionando: diseño, desarrollo, despliegue
+            y las decisiones de infraestructura que nadie te suele explicar.
+          </p>
+        </div>
+        <div class="service">
+          <h3>Rediseño de webs existentes</h3>
+          <p>
+            Cuando la web ya existe pero pesa, no se entiende o no convierte. Se mide antes y
+            después, para que la mejora no sea una opinión.
+          </p>
+        </div>
+      </div>
+
+      <p class="service-note">
+        Si tu proyecto no encaja del todo en ninguna de estas cajas, escríbeme igualmente.
+        Prefiero decirte que no puedo ayudarte a venderte algo que no necesitas.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="shell">
+      <p class="eyebrow">Accesibilidad</p>
+      <h2>Puede que tu web ya esté incumpliendo la ley.</h2>
+      <p class="lead">
+        La Ley Europea de Accesibilidad se aplica desde el 28 de junio de 2025 a comercio
+        electrónico, banca, transporte, telecomunicaciones y medios audiovisuales. No es una
+        recomendación de buenas prácticas: es una obligación con fecha.
+      </p>
+
+      <div class="rule">
+        <p class="date">28 · 06 · 2025</p>
+        <p>
+          Las microempresas que prestan servicios quedan exentas: menos de diez personas y
+          hasta dos millones de facturación. Por encima de ese umbral, no.
+        </p>
+      </div>
+
+      <p style="margin-top:28px">
+        Reviso si tu caso entra, qué falla concretamente y qué cuesta arreglarlo. Y lo hago
+        con el mismo criterio con el que está hecha esta página: contraste comprobado,
+        navegación completa con teclado y respeto por quien ha pedido a su sistema que las
+        cosas no se muevan.
+      </p>
+    </div>
+  </section>
+
+  <section class="band band-tint">
+    <div class="shell">
+      <p class="eyebrow">Quién está detrás</p>
+      <h2>Una persona. Y esa es la ventaja.</h2>
+
+      <div class="who" style="margin-top:36px">
+        <img src="/brand/nobodyworks-icono-azul-512.png" alt="" width="150" height="150">
+        <div>
+          <p>
+            Me llamo Marco Cámara y NobodyWorks es mi estudio. No hay equipo comercial, ni
+            gestor de cuenta, ni una capa entre tú y quien escribe el código. Hablas conmigo
+            desde el primer correo hasta el último despliegue.
+          </p>
+          <p>
+            Eso tiene un límite honesto: no puedo con todo a la vez. Si tu proyecto necesita
+            diez personas en paralelo, no soy tu opción y te lo diré en la primera
+            conversación en vez de aceptarlo y estirarlo seis meses.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="contact" id="contacto">
+  <div class="shell">
+    <p class="eyebrow">Contacto</p>
+    <h2>Cuéntame qué necesitas.</h2>
+    <p style="margin-top:18px">
+      Tres campos. Respondo yo, normalmente en menos de veinticuatro horas laborables.
+    </p>
+
+    <div class="contact-grid">
+      <form method="post" action="/api/contact">
+        <p class="alert alert-bad" id="error" role="alert" hidden></p>
+
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" required autocomplete="name" maxlength="120">
+        </div>
+
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" required autocomplete="email" maxlength="200">
+        </div>
+
+        <div class="field">
+          <label for="mensaje">Qué necesitas</label>
+          <textarea id="mensaje" name="mensaje" required maxlength="4000"
+            placeholder="No hace falta que sea preciso. Con entender el problema me vale para empezar."></textarea>
+        </div>
+
+        <div class="honey" aria-hidden="true">
+          <label for="empresa">No rellenes este campo</label>
+          <input id="empresa" name="empresa" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit">Enviar</button>
+
+        <p class="form-note">
+          Uso tu correo únicamente para responderte. No hay lista, no hay boletín y no se lo
+          cedo a nadie.
+        </p>
+      </form>
+
+      <div class="aside">
+        <div class="block">
+          <h3>Prefiero el correo</h3>
+          <p><a href="mailto:hola@nobodyworks.es">hola@nobodyworks.es</a></p>
+        </div>
+        <div class="block">
+          <h3>Qué ayuda a que responda rápido</h3>
+          <p>Qué problema quieres resolver, para cuándo, y si ya existe algo funcionando.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell footer-row">
+    <span>© 2026 NobodyWorks · Marco Cámara</span>
+    <span><a href="mailto:hola@nobodyworks.es">hola@nobodyworks.es</a></span>
+  </div>
+</footer>
+
+<script>
+  // The entry sequence needs two real measurements, so it is computed rather than guessed:
+  // the arc's own length, and each glyph's distance to the switch that lights the name.
+  (function () {
+    var mark = document.querySelector('.hero-mark');
+    if (!mark) return;
+
+    var arc = mark.querySelector('.sw-arc');
+    if (arc && arc.getTotalLength) {
+      var length = arc.getTotalLength();
+      if (length > 0) arc.style.setProperty('--arc-len', length.toFixed(2));
+    }
+
+    var bar = mark.querySelector('.sw-bar');
+    var letters = [].slice.call(mark.querySelectorAll('.ltr'));
+    if (!bar || !letters.length || !bar.getBBox) return;
+
+    var pivot = bar.getBBox().x;
+
+    letters
+      .map(function (el) { return { el: el, distance: Math.abs(el.getBBox().x - pivot) }; })
+      .sort(function (a, b) { return a.distance - b.distance; })
+      .forEach(function (entry, index) {
+        entry.el.style.setProperty('--d', (430 + index * 42) + 'ms');
+      });
+  })();
+
+  // The endpoint redirects back with a code when it cannot accept the message.
+  // Say what happened and what to do about it — never a bare "algo ha fallado".
+  (function () {
+    var messages = {
+      incompleto: 'Faltan campos por rellenar. Los tres son necesarios para poder responderte.',
+      correo: 'Ese correo no parece válido. Revísalo, porque es la única forma que tengo de contestarte.',
+      largo: 'El mensaje es más largo de lo que admite el formulario. Recórtalo o escríbeme a hola@nobodyworks.es.',
+      formato: 'No he podido leer el formulario. Vuelve a intentarlo, o escríbeme a hola@nobodyworks.es.',
+      envio: 'El mensaje no ha salido. No es culpa tuya: escríbeme a hola@nobodyworks.es y lo veo.',
+      configuracion: 'El formulario no está operativo ahora mismo. Escríbeme a hola@nobodyworks.es.'
+    };
+
+    var code = new URLSearchParams(location.search).get('error');
+    var box = document.getElementById('error');
+    if (!code || !box || !messages[code]) return;
+
+    box.textContent = messages[code];
+    box.hidden = false;
+  })();
+</script>
+
+</body>
+</html>
