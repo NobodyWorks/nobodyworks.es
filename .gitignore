@@ -1,0 +1,22 @@
+# Cloudflare
+.wrangler/
+.dev.vars
+.dev.vars.*
+
+# Dependencias y artefactos de build, por si en algún momento entra un paso de build
+node_modules/
+dist/
+.cache/
+
+# Sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
