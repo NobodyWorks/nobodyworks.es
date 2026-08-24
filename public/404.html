@@ -8,10 +8,20 @@
 <link rel="icon" href="/brand/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1524">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Plus Jakarta Sans — SIL Open Font License 1.1, texto completo en /fonts/OFL.txt.
+     Fuente variable: un archivo de 27 KB cubre de 200 a 800, así que toda la tipografía
+     cuesta una petición. Servida desde este dominio a propósito: pedírsela a Google
+     enviaría la IP de cada visitante a un tercero antes de que la página pinte. */
+  @font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('/fonts/plus-jakarta-sans-latin.woff2') format('woff2-variations');
+  }
+
   :root {
     --ink: #0B1524;
     --blue-light: #4D8DFF;
