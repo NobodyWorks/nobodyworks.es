@@ -20,3 +20,6 @@ $RECYCLE.BIN/
 .idea/
 *.swp
 *~
+
+# Engram memories — local only. This repo is PUBLIC: never commit them.
+.engram/
